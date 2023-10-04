@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Individu {
     private double dE, dR, dI;
-    private int timer = 0;
+    private int timer = 0, posX, posY;
     private Etat etat;
 
     private double lambdaE = 3.0;  // Paramètre pour dE
@@ -11,16 +11,21 @@ public class Individu {
 
     private Random random = new Random();
 
-    public Individu(Etat etat) {
+    public Individu(Etat etat, int size) {
         this.etat = etat;
 
         dE = -Math.log(1 - random.nextDouble()) / lambdaE;
         dR = -Math.log(1 - random.nextDouble()) / lambdaR;
         dI = -Math.log(1 - random.nextDouble()) / lambdaI;
 
-        System.out.println("dE : " + dE);
-        System.out.println("dR : " + dR);
-        System.out.println("dI : " + dI);
+        posX = random.nextInt(size);
+        posY = random.nextInt(size);
+
+        //System.out.println("dE : " + dE);
+        //System.out.println("dR : " + dR);
+        //System.out.println("dI : " + dI);
+
+        System.out.println("posX : " + posX + " posY : " + posY);
     }
 
     public void upTimer(){

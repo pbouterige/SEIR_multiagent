@@ -9,9 +9,9 @@ public class Grille {
         this.grille_malades = new int[size][size];
         this.individus = new Individu[nb_individus];
         for (int i = 0  ; i < nb_individus - 20 ; i ++)
-            individus[i] = new Individu(Etat.S);
+            individus[i] = new Individu(Etat.S, size);
         for (int i = nb_individus - 20  ; i < nb_individus ; i ++)
-            individus[i] = new Individu(Etat.I);
+            individus[i] = new Individu(Etat.I, size);
 
     }
 }
