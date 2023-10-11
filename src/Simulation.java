@@ -1,28 +1,38 @@
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
 public class Simulation {
 
     private Grille grille;
     private int nb_tour;
+    private PrintWriter writer;
 
     public Simulation(int nb_tour) {
         this.nb_tour = nb_tour;
         this.grille = new Grille();
     }
 
+
+
     public void simuler(String nom_fichier)
     {
         int [] etat_pop = new int[4];
         maj_pop(etat_pop);
 
+
+        init_writer(nom_fichier);
         for (int i = 0 ; i < nb_tour ; i++)
         {
-            ecrire_fichier(i, etat_pop, nom_fichier);
+            ecrire_fichier(i, etat_pop);
         }
-
-
-
-
-
-
+        
+        
+        
+        
+        
+        
+        close_writer();
     }
 
     private void maj_pop(int [] etat_pop){
@@ -51,9 +61,28 @@ public class Simulation {
         }
     }
 
-
-    private void ecrire_fichier(int tour, int [] etat_pop, String nom_fichier)
+    private void init_writer(String nom_fichier)
     {
+        try {
+            writer = new PrintWriter(nom_fichier, "UTF-8");
+            writer.println("T,S,E,I,R");
+        } catch (FileNotFoundException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void close_writer()
+    {
+        writer.close();
+    }
+
+    private void ecrire_fichier(int tour, int [] etat_pop)
+    {
+        StringBuilder s = new StringBuilder(tour);
+        for (int i = 0; i < etat_pop.length; i++) {
+            s.append(etat_pop[i]);
+        }
+        writer.println(s);
+        s = null;
     }
 }
