@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class Individu {
-    private double dE, dR, dI;
+    private int dE, dR, dI;
     private int timer = 0, posX, posY;
     private Etat etat;
 
@@ -14,9 +14,9 @@ public class Individu {
     public Individu(Etat etat, int size) {
         this.etat = etat;
 
-        dE = -lambdaE * Math.log(1 - random.nextDouble());
-        dI = -lambdaI * Math.log(1 - random.nextDouble());
-        dR = -lambdaR * Math.log(1 - random.nextDouble());
+        dE = (int)(-lambdaE * Math.log(1 - random.nextDouble()));
+        dI = (int)(-lambdaI * Math.log(1 - random.nextDouble()));
+        dR = (int)(-lambdaR * Math.log(1 - random.nextDouble()));
 
 
         posX = random.nextInt(size);
