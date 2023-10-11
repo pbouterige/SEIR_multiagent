@@ -80,6 +80,7 @@ public class Simulation {
     {
         StringBuilder s = new StringBuilder(tour);
         for (int i = 0; i < etat_pop.length; i++) {
+            s.append(',');
             s.append(etat_pop[i]);
         }
         writer.println(s);
