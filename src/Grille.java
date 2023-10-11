@@ -29,7 +29,7 @@ public class Grille {
 
     public void maj_individus()
     {
-        for ( int i = 0 ; i < nb_individus ; i++) { individus[i].maj_individu(infection_voisinage(individus[i].getPosX(),individus[i].getPosY()))}
+        for ( int i = 0 ; i < nb_individus ; i++) { individus[i].maj_individu(infection_voisinage(individus[i].getPosX(),individus[i].getPosY()));}
     }
 
     public void deplacer_individus()

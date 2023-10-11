@@ -1,6 +1,4 @@
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 
 public class Simulation {
 
@@ -14,17 +12,13 @@ public class Simulation {
     }
 
 
-
-    public void simuler(String nom_fichier)
-    {
-        int [] etat_pop = new int[4];
+    public void simuler(String nom_fichier) throws IOException {
+        int[] etat_pop = new int[4];
         maj_pop(etat_pop);
 
-
-        init_writer(nom_fichier);
-        for (int i = 0 ; i < nb_tour ; i++)
-        {
-            ecrire_fichier(i, etat_pop);
+        creerFichier(nom_fichier);
+        for (int i = 0; i < nb_tour; i++) {
+            ecrire_fichier(i, etat_pop, nom_fichier);
 
             grille.maj_individus();
 
@@ -35,21 +29,15 @@ public class Simulation {
         }
 
 
-
-
-
-
-        close_writer();
     }
 
-    private void maj_pop(int [] etat_pop){
-        for (int i = 0 ; i < 4 ; i++)
+    private void maj_pop(int[] etat_pop) {
+        for (int i = 0; i < 4; i++)
             etat_pop[i] = 0;
 
         grille.razGrille_malade();
 
-        for (int i = 0 ; i < grille.getNb_individus() ; i++)
-        {
+        for (int i = 0; i < grille.getNb_individus(); i++) {
             Etat etat = grille.getIndividus()[i].getEtat();
             switch (etat) {
                 case S:
@@ -60,7 +48,7 @@ public class Simulation {
                     break;
                 case I:
                     etat_pop[2]++;
-                    grille.getGrille_malades()[grille.getIndividus()[i].getPosX()][grille.getIndividus()[i].getPosY()] ++;
+                    grille.getGrille_malades()[grille.getIndividus()[i].getPosX()][grille.getIndividus()[i].getPosY()]++;
                     break;
                 case R:
                     etat_pop[3]++;
@@ -71,29 +59,40 @@ public class Simulation {
         }
     }
 
-    private void init_writer(String nom_fichier)
-    {
+    public static void creerFichier(String nom_fichier) {
         try {
-            writer = new PrintWriter(nom_fichier, "UTF-8");
-            writer.println("T,S,E,I,R");
-        } catch (FileNotFoundException | UnsupportedEncodingException e) {
-            e.printStackTrace();
+            File fichier = new File(nom_fichier);
+
+            // Crée le fichier s'il n'existe pas
+            if (!fichier.exists()) {
+                fichier.createNewFile();
+            }
+
+            // Écriture des en-têtes dans le fichier
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fichier));
+            writer.write("tour, S, E, I, R\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace(); // Gestion d'erreurs d'entrée/sortie
         }
     }
 
-    private void close_writer()
-    {
-        writer.close();
+    public static void ecrire_fichier(int i, int[] etat_pop, String nom_fichier) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(nom_fichier, true)); // Le paramètre true permet d'ajouter au fichier existant sans l'effacer.
+
+            // Formatage de la ligne à écrire dans le fichier
+            String ligne = String.format("%d, %d, %d, %d, %d%n", i, etat_pop[0], etat_pop[1], etat_pop[2], etat_pop[3]);
+
+            // Écriture de la ligne dans le fichier
+            writer.write(ligne);
+
+            // Fermeture du fichier
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace(); // Gestion d'erreurs d'entrée/sortie
+        }
     }
 
-    private void ecrire_fichier(int tour, int [] etat_pop)
-    {
-        StringBuilder s = new StringBuilder(tour);
-        for (int i = 0; i < etat_pop.length; i++) {
-            s.append(',');
-            s.append(etat_pop[i]);
-        }
-        writer.println(s);
-        s = null;
-    }
+
 }
