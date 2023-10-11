@@ -41,4 +41,49 @@ public class Individu {
     public Etat getEtat() {
         return etat;
     }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public void maj_individu(int nb_malade_voisin)
+    {
+        switch (etat)
+        {
+            case S:
+                double infectionProbability = 1 - Math.exp(-0.5 * nb_malade_voisin);
+                double randomValue = Math.random();
+                if (randomValue < infectionProbability)
+                {
+                    etat = Etat.E;
+                    timer = 0;
+                }
+                break;
+            case E:
+                if (timer >= dE)
+                {
+                    etat = Etat.I;
+                    timer = 0;
+                }
+                break;
+            case I:
+                if (timer >= dI)
+                {
+                    etat = Etat.R;
+                    timer = 0;
+                }
+                break;
+            case R:
+                if (timer >= dR)
+                {
+                    etat = Etat.S;
+                    timer = 0;
+                }
+                break;
+        }
+    }
 }

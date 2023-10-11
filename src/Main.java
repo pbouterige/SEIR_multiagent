@@ -1,5 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        Grille grille = new Grille();
+
+        Simulation s = new Simulation(730);
+        s.simuler("../simulation_result/test.txt");
     }
 }

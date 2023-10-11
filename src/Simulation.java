@@ -16,6 +16,12 @@ public class Simulation {
         for (int i = 0 ; i < nb_tour ; i++)
         {
             ecrire_fichier(i, etat_pop, nom_fichier);
+
+            grille.maj_individus();
+
+            grille.deplacer_individus();
+
+            maj_pop(etat_pop);
         }
 
 
@@ -29,6 +35,8 @@ public class Simulation {
         for (int i = 0 ; i < 4 ; i++)
             etat_pop[i] = 0;
 
+        grille.razGrille_malade();
+
         for (int i = 0 ; i < grille.getNb_individus() ; i++)
         {
             Etat etat = grille.getIndividus()[i].getEtat();
@@ -41,6 +49,7 @@ public class Simulation {
                     break;
                 case I:
                     etat_pop[2]++;
+                    grille.getGrille_malades()[grille.getIndividus()[i].getPosX()][grille.getIndividus()[i].getPosY()] ++;
                     break;
                 case R:
                     etat_pop[3]++;

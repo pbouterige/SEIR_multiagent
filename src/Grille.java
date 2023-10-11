@@ -22,4 +22,46 @@ public class Grille {
     public Individu[] getIndividus() {
         return individus;
     }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void maj_individus()
+    {
+        for ( int i = 0 ; i < nb_individus ; i++) { individus[i].maj_individu(infection_voisinage(individus[i].getPosX(),individus[i].getPosY()))}
+    }
+
+    public void deplacer_individus()
+    {
+        for ( int i = 0 ; i < nb_individus ; i++) { individus[i].deplacer_individu(size); }
+    }
+
+    private int infection_voisinage(int x, int y){
+        int result = 0;
+        for (int i = -1 ; i <= 1 ; i++){
+            for (int j = -1 ; j <= 1 ; j++){
+                if ((x+i >= 0) && (x+i < size) && (y+i >= 0) && (y+i < size))
+                {
+                    result += grille_malades[x+i][y+i];
+                }
+            }
+        }
+        return result;
+    }
+
+    public int[][] getGrille_malades() {
+        return grille_malades;
+    }
+
+    public void razGrille_malade()
+    {
+        for (int i = 0 ; i < size ; i++)
+        {
+            for (int j = 0 ; j < size ;j++)
+            {
+                grille_malades[i][j] = 0;
+            }
+        }
+    }
 }
