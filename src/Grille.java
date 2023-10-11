@@ -12,6 +12,14 @@ public class Grille {
             individus[i] = new Individu(Etat.S, size);
         for (int i = nb_individus - 20  ; i < nb_individus ; i ++)
             individus[i] = new Individu(Etat.I, size);
+    }
 
+
+    public int getNb_individus() {
+        return nb_individus;
+    }
+
+    public Individu[] getIndividus() {
+        return individus;
     }
 }

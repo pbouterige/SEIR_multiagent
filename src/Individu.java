@@ -5,31 +5,40 @@ public class Individu {
     private int timer = 0, posX, posY;
     private Etat etat;
 
-    private double lambdaE = 3.0;  // Paramètre pour dE
-    private double lambdaR = 7.0;  // Paramètre pour dR
-    private double lambdaI = 365.0;  // Paramètre pour dI
+    private static double lambdaE = 3.0;  // Paramètre pour dE
+    private static double lambdaI = 7.0;  // Paramètre pour dR
+    private static double lambdaR = 365.0;  // Paramètre pour dI
 
     private Random random = new Random();
 
     public Individu(Etat etat, int size) {
         this.etat = etat;
 
-        dE = -Math.log(1 - random.nextDouble()) / lambdaE;
-        dR = -Math.log(1 - random.nextDouble()) / lambdaR;
-        dI = -Math.log(1 - random.nextDouble()) / lambdaI;
+        dE = -lambdaE * Math.log(1 - random.nextDouble());
+        dI = -lambdaI * Math.log(1 - random.nextDouble());
+        dR = -lambdaR * Math.log(1 - random.nextDouble());
+
 
         posX = random.nextInt(size);
         posY = random.nextInt(size);
 
-        //System.out.println("dE : " + dE);
-        //System.out.println("dR : " + dR);
-        //System.out.println("dI : " + dI);
+        System.out.println("dE : " + dE);
+        System.out.println("dR : " + dR);
+        System.out.println("dI : " + dI);
 
         System.out.println("posX : " + posX + " posY : " + posY);
     }
 
-    public void upTimer(){
-        this.timer += 1;
+    public void deplacer_individu(int size)
+    {
+        this.timer ++;
+
+        this.posX = random.nextInt(size);
+        this.posY = random.nextInt(size);
+
     }
 
+    public Etat getEtat() {
+        return etat;
+    }
 }
