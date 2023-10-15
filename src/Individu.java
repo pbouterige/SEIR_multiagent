@@ -9,7 +9,8 @@ public class Individu {
     private static double lambdaI = 7.0;  // Paramètre pour dR
     private static double lambdaR = 365.0;  // Paramètre pour dI
 
-    private Random random = new Random();
+    private static MersenneTwisterFast random = 
+    new MersenneTwisterFast(new int[]{0x123, 0x234, 0x345, 0x456});
 
     public Individu(Etat etat, int size) {
         this.etat = etat;
@@ -27,6 +28,11 @@ public class Individu {
         System.out.println("dI : " + dI);
 
         System.out.println("posX : " + posX + " posY : " + posY);
+    }
+
+    public static int get_next_int_random_for_test(int max)
+    {
+        return random.nextInt(max);
     }
 
     public void deplacer_individu(int size)
@@ -56,7 +62,7 @@ public class Individu {
         {
             case S:
                 double infectionProbability = 1 - Math.exp(-0.5 * nb_malade_voisin);
-                double randomValue = Math.random();
+                double randomValue = random.nextDouble();
                 if (randomValue < infectionProbability)
                 {
                     etat = Etat.E;

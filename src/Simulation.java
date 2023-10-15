@@ -1,10 +1,10 @@
 import java.io.*;
+import java.lang.reflect.Array;
 
 public class Simulation {
 
     private Grille grille;
     private int nb_tour;
-    private PrintWriter writer;
 
     public Simulation(int nb_tour) {
         this.nb_tour = nb_tour;
@@ -17,6 +17,7 @@ public class Simulation {
         maj_pop(etat_pop);
 
         creerFichier(nom_fichier);
+
         for (int i = 0; i < nb_tour; i++) {
             ecrire_fichier(i, etat_pop, nom_fichier);
 
@@ -27,8 +28,22 @@ public class Simulation {
             maj_pop(etat_pop);
 
         }
+        
 
+    }
 
+    public void test_individu_random()
+    {
+        int[] bins = new int[1000];
+        for (int i = 0; i < bins.length; i++) {
+            bins[i] = 0;
+        }
+        for (int i = 0; i < grille.getIndividus().length; i++) {
+            bins[Individu.get_next_int_random_for_test(nb_tour)]++;
+        }
+        for (int i = bins.length - 1; i >= 0 ; i--) {
+            System.out.println(bins[i]);
+        }
     }
 
     private void maj_pop(int[] etat_pop) {
@@ -48,7 +63,9 @@ public class Simulation {
                     break;
                 case I:
                     etat_pop[2]++;
-                    grille.getGrille_malades()[grille.getIndividus()[i].getPosX()][grille.getIndividus()[i].getPosY()]++;
+                    grille.getGrille_malades()
+                    [grille.getIndividus()[i].getPosX()]
+                    [grille.getIndividus()[i].getPosY()]++;
                     break;
                 case R:
                     etat_pop[3]++;
