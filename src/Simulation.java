@@ -5,6 +5,7 @@ public class Simulation {
 
     private Grille grille;
     private int nb_tour;
+    private PrintWriter writer;
 
     public Simulation(int nb_tour) {
         this.nb_tour = nb_tour;
@@ -28,7 +29,6 @@ public class Simulation {
             maj_pop(etat_pop);
 
         }
-        
 
     }
 
