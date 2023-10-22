@@ -23,11 +23,11 @@ public class Individu {
         posX = random.nextInt(size);
         posY = random.nextInt(size);
 
-        System.out.println("dE : " + dE);
-        System.out.println("dR : " + dR);
-        System.out.println("dI : " + dI);
+        // System.out.println("dE : " + dE);
+        // System.out.println("dR : " + dR);
+        // System.out.println("dI : " + dI);
 
-        System.out.println("posX : " + posX + " posY : " + posY);
+        // System.out.println("posX : " + posX + " posY : " + posY);
     }
 
     public static int get_next_int_random_for_test(int max)
@@ -63,28 +63,28 @@ public class Individu {
             case S:
                 double infectionProbability = 1 - Math.exp(-0.5 * nb_malade_voisin);
                 double randomValue = random.nextDouble();
-                if (randomValue < infectionProbability)
+                if (randomValue <= infectionProbability)
                 {
                     etat = Etat.E;
                     timer = 0;
                 }
                 break;
             case E:
-                if (timer >= dE)
+                if (timer > dE)
                 {
                     etat = Etat.I;
                     timer = 0;
                 }
                 break;
             case I:
-                if (timer >= dI)
+                if (timer > dI)
                 {
                     etat = Etat.R;
                     timer = 0;
                 }
                 break;
             case R:
-                if (timer >= dR)
+                if (timer > dR)
                 {
                     etat = Etat.S;
                     timer = 0;

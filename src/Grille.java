@@ -41,7 +41,8 @@ public class Grille {
         int result = 0;
         for (int i = -1 ; i <= 1 ; i++){
             for (int j = -1 ; j <= 1 ; j++){
-                    result += grille_malades[(x+i) % size][(y+i) % size];
+                result += grille_malades[(x+i + size) % size][(y+i + size) % size];
+
             }
         }
         return result;
