@@ -37,7 +37,7 @@ public class Simulation {
             bins[i] = 0;
         }
         for (int i = 0; i < grille.getIndividus().length; i++) {
-            bins[Individu.get_next_int_random_for_test(nb_tour)]++;
+            bins[Individu.get_next_int(nb_tour)]++;
         }
         for (int i = bins.length - 1; i >= 0 ; i--) {
             System.out.println(bins[i]);

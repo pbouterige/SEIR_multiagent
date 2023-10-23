@@ -30,7 +30,7 @@ public class Individu {
         // System.out.println("posX : " + posX + " posY : " + posY);
     }
 
-    public static int get_next_int_random_for_test(int max)
+    public static int get_next_int(int max)
     {
         return random.nextInt(max);
     }

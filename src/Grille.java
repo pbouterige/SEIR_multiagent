@@ -76,10 +76,10 @@ public class Grille {
         }
     }
 
-    public void generateRandomPermutation() {
+    private void generateRandomPermutation() {
 
         for (int i = nb_individus - 1; i > 0; i--) {
-            int j = Individu.get_next_int_random_for_test(i+1);
+            int j = Individu.get_next_int(i+1);
             // Échanger permutation[i] et permutation[j]
             int temp = permu[i];
             permu[i] = permu[j];
