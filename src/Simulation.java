@@ -5,7 +5,7 @@ public class Simulation {
 
     private Grille grille;
     private int nb_tour;
-    private PrintWriter writer;
+    // private PrintWriter writer;
 
     public Simulation(int nb_tour) {
         this.nb_tour = nb_tour;
@@ -22,9 +22,7 @@ public class Simulation {
         for (int i = 0; i < nb_tour; i++) {
             ecrire_fichier(i, etat_pop, nom_fichier);
 
-            grille.maj_individus();
-
-            grille.deplacer_individus();
+            grille.deplacer_maj_individus();
 
             maj_pop(etat_pop);
 
